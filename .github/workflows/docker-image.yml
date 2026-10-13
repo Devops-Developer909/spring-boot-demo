@@ -1,0 +1,27 @@
+
+name: Azure Self-Hosted Runner Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: [self-hosted, linux, x64, azure]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify runner
+        run: |
+          echo "Running on Azure VM"
+          hostname
+          uname -a
+          git --version
+          docker --version
